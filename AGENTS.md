@@ -8,6 +8,18 @@ Global skills should be installed in the active agent's global skills directory.
 
 Issue-tracker skills should only be used when the task explicitly involves issue lookup, status updates, task creation, dependency analysis, or review workflow tied to a tracker.
 
+## Agent Specificity
+
+The workflow core may be shared across agents, but agent-specific capabilities must be preserved.
+
+Rules:
+
+- understand the operational differences of each agent before changing rules
+- do not remove agent-specific instructions just to force uniformity
+- keep shared workflow rules in the common layer and agent-specific behavior in agent-specific overlays
+- only change the workflow standard when there is 100% confidence that the change is safe for every affected agent
+- when in doubt, preserve the agent-specific rule and document the difference
+
 ### Process Skills
 
 Process skills define how to execute a phase, not what to build.

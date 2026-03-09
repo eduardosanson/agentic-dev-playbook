@@ -9,6 +9,8 @@ required_files=(
   "$ROOT_DIR/spec.md"
   "$ROOT_DIR/prompt_plan.md"
   "$ROOT_DIR/.githooks/pre-commit"
+  "$ROOT_DIR/agent-rules/codex/AGENTS.md"
+  "$ROOT_DIR/agent-rules/claude/CLAUDE.md"
   "$ROOT_DIR/docs/analysis/source-mapping.md"
   "$ROOT_DIR/docs/analysis/flow-suggestions.md"
   "$ROOT_DIR/docs/decisions/BOOTSTRAP.md"

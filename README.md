@@ -6,6 +6,8 @@ This repository is a generic adaptation of a Claude-centric workflow into an age
 
 This repository is also the canonical source of truth for workflow rules that can be synchronized into different agent environments.
 
+It is the canonical source for the shared workflow, but it must preserve agent-specific behavior where runtimes, tools, or ecosystems differ.
+
 ## What This Repo Contains
 
 - `AGENTS.md`: generic top-level instructions for any agentic development environment
@@ -84,6 +86,23 @@ This repository should be treated as the default standard for:
 - synchronization of global agent rules
 
 When Codex rules and Claude rules diverge, this repository should be updated first and then synced outward.
+
+## Agent-Specific Overlays
+
+This repository stores:
+
+- a shared workflow standard
+- agent-specific rule overlays when behavior differs by runtime
+
+Current agent-specific rule files:
+
+- `agent-rules/codex/AGENTS.md`
+- `agent-rules/claude/CLAUDE.md`
+
+Rule:
+
+- do not flatten agent-specific behavior into a single file unless there is 100% certainty that the behavior is portable
+- changes to workflow rules must account for the specific capabilities of each agent before synchronization
 
 ## Execution Guardrails
 
@@ -191,6 +210,8 @@ That means:
 - documentation should be updated here first
 - sync utilities should distribute this standard to agent environments
 - local agent files should not become the primary source of truth
+
+For agent-specific behavior, the canonical source is the corresponding file under `agent-rules/`.
 
 ## Git Rule Sync Skill
 

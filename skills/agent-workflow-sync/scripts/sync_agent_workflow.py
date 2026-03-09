@@ -14,6 +14,12 @@ TARGETS = {
     "home": Path.home() / "AGENTS.md",
 }
 
+SOURCE_PATHS = {
+    "codex": Path("agent-rules/codex/AGENTS.md"),
+    "claude": Path("agent-rules/claude/CLAUDE.md"),
+    "home": Path("AGENTS.md"),
+}
+
 def detect_agent() -> str | None:
     if (Path.home() / ".codex" / "AGENTS.md").exists():
         return "codex"
@@ -28,14 +34,25 @@ def file_hash(content: str) -> str:
     return hashlib.sha256(content.encode("utf-8")).hexdigest()
 
 
-def load_local_source(repo_root: Path) -> str:
-    source_path = repo_root / "AGENTS.md"
+def resolve_source_path(repo_root: Path, agent: str) -> Path:
+    preferred = repo_root / SOURCE_PATHS[agent]
+    if preferred.is_file():
+        return preferred
+    fallback = repo_root / "AGENTS.md"
+    if fallback.is_file():
+        return fallback
+    raise FileNotFoundError(f"Missing source file for agent '{agent}'")
+
+
+def load_local_source(repo_root: Path, agent: str) -> tuple[str, str]:
+    source_path = resolve_source_path(repo_root, agent)
     if not source_path.is_file():
         raise FileNotFoundError(f"Missing source file: {source_path}")
-    return source_path.read_text(encoding="utf-8")
+    return source_path.read_text(encoding="utf-8"), str(source_path.relative_to(repo_root))
 
 
-def load_remote_source(repo_root: Path) -> str:
+def load_remote_source(repo_root: Path, agent: str) -> tuple[str, str]:
+    relative_source = str(SOURCE_PATHS[agent])
     fetch = subprocess.run(
         ["git", "-C", str(repo_root), "fetch", "origin", "main"],
         capture_output=True,
@@ -45,14 +62,22 @@ def load_remote_source(repo_root: Path) -> str:
     if fetch.returncode != 0:
         raise RuntimeError(fetch.stderr.strip() or "git fetch failed")
     show = subprocess.run(
-        ["git", "-C", str(repo_root), "show", "origin/main:AGENTS.md"],
+        ["git", "-C", str(repo_root), "show", f"origin/main:{relative_source}"],
         capture_output=True,
         text=True,
         check=False,
     )
     if show.returncode != 0:
-        raise RuntimeError(show.stderr.strip() or "git show origin/main:AGENTS.md failed")
-    return show.stdout
+        fallback_show = subprocess.run(
+            ["git", "-C", str(repo_root), "show", "origin/main:AGENTS.md"],
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        if fallback_show.returncode != 0:
+            raise RuntimeError(show.stderr.strip() or "git show failed for agent-specific and fallback sources")
+        return fallback_show.stdout, "AGENTS.md"
+    return show.stdout, relative_source
 
 
 def backup_and_write(path: Path, content: str) -> str:
@@ -74,21 +99,25 @@ def main() -> int:
     args = parser.parse_args()
 
     repo_root = Path(args.repo_root).expanduser().resolve()
-    try:
-        source_content = load_remote_source(repo_root) if args.fetch_remote else load_local_source(repo_root)
-        source_kind = "origin/main:AGENTS.md" if args.fetch_remote else "local AGENTS.md"
-    except Exception as exc:
-        if args.fetch_remote:
-            source_content = load_local_source(repo_root)
-            source_kind = f"local AGENTS.md (remote fetch failed: {exc})"
-        else:
-            print(str(exc), file=sys.stderr)
-            return 1
-
     agent = args.agent or detect_agent()
     if agent is None:
         print("Could not detect current agent. Pass --agent codex|claude|home.", file=sys.stderr)
         return 1
+
+    try:
+        if args.fetch_remote:
+            source_content, source_relpath = load_remote_source(repo_root, agent)
+            source_kind = f"origin/main:{source_relpath}"
+        else:
+            source_content, source_relpath = load_local_source(repo_root, agent)
+            source_kind = f"local {source_relpath}"
+    except Exception as exc:
+        if args.fetch_remote:
+            source_content, source_relpath = load_local_source(repo_root, agent)
+            source_kind = f"local {source_relpath} (remote fetch failed: {exc})"
+        else:
+            print(str(exc), file=sys.stderr)
+            return 1
 
     path = TARGETS[agent]
     source_digest = file_hash(source_content)
