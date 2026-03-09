@@ -16,6 +16,8 @@ RULES_DIR = Path.home() / ".codex" / "rules"
 STATE_FILE = RULES_DIR / "agentic-dev-playbook-superpowers-state.json"
 LOG_FILE = RULES_DIR / "agentic-dev-playbook-superpowers-log.jsonl"
 PROJECT_SKILLS_DIRNAME = "skills"
+CURSOR_RULE_SOURCE = Path("agent-rules/cursor/agentic-dev-playbook.mdc")
+WINDSURF_RULE_SOURCE = Path("agent-rules/windsurf/agentic-dev-playbook.md")
 
 
 def now_iso() -> str:
@@ -179,22 +181,61 @@ def sync_project_skills(repo_root: Path, apply: bool) -> dict:
     return report
 
 
+def export_editor_rules(repo_root: Path, workspace_root: Path, apply: bool) -> dict:
+    report = {
+        "cursor": {"target": str(workspace_root / ".cursor" / "rules" / "agentic-dev-playbook.mdc"), "status": "skipped"},
+        "windsurf": {"target": str(workspace_root / ".windsurf" / "rules" / "agentic-dev-playbook.md"), "status": "skipped"},
+        "notes": [
+            "Cursor official Superpowers install uses marketplace command: /add-plugin superpowers",
+            "Windsurf compatibility in this project is provided through workspace rule files; no official upstream Superpowers install path for Windsurf was detected in the inspected repository"
+        ],
+    }
+
+    cursor_source = repo_root / CURSOR_RULE_SOURCE
+    windsurf_source = repo_root / WINDSURF_RULE_SOURCE
+
+    if apply:
+        cursor_target = workspace_root / ".cursor" / "rules" / "agentic-dev-playbook.mdc"
+        cursor_target.parent.mkdir(parents=True, exist_ok=True)
+        cursor_target.write_text(cursor_source.read_text(encoding="utf-8"), encoding="utf-8")
+        report["cursor"]["status"] = "written"
+
+        windsurf_target = workspace_root / ".windsurf" / "rules" / "agentic-dev-playbook.md"
+        windsurf_target.parent.mkdir(parents=True, exist_ok=True)
+        windsurf_target.write_text(windsurf_source.read_text(encoding="utf-8"), encoding="utf-8")
+        report["windsurf"]["status"] = "written"
+    else:
+        report["cursor"]["status"] = "available"
+        report["windsurf"]["status"] = "available"
+
+    return report
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--repo-root", required=True)
+    parser.add_argument("--workspace-root")
     parser.add_argument("--apply", action="store_true")
     args = parser.parse_args()
 
     repo_root = Path(args.repo_root).expanduser().resolve()
+    workspace_root = Path(args.workspace_root).expanduser().resolve() if args.workspace_root else None
 
     superpowers_actions = ensure_superpowers(args.apply)
     skills_report = sync_project_skills(repo_root, args.apply)
+    editor_report = export_editor_rules(repo_root, workspace_root, args.apply) if workspace_root else {
+        "cursor": {"status": "not-requested"},
+        "windsurf": {"status": "not-requested"},
+        "notes": ["Pass --workspace-root to materialize Cursor and Windsurf workspace rule files"],
+    }
 
     payload = {
         "timestamp": now_iso(),
         "repo_root": str(repo_root),
+        "workspace_root": str(workspace_root) if workspace_root else None,
         "apply": args.apply,
         "superpowers": superpowers_actions,
+        "editors": editor_report,
         "skills": skills_report,
     }
     if args.apply:

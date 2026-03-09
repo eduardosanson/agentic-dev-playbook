@@ -1,0 +1,32 @@
+---
+description: Agentic Dev Playbook workflow standard for Cursor Agent
+alwaysApply: true
+---
+
+# Agentic Dev Playbook
+
+Follow this workflow:
+
+```text
+[ PLANNING ]
+DOR -> SPEC -> PLAN
+       |
+       v
+  APPROVAL CHECKPOINT
+       |
+       v
+[ EXECUTION ]
+TDD -> BUILD -> VERIFY -> EVIDENCE -> REVIEW/PR -> DONE
+```
+
+Rules:
+
+- do not skip phases
+- ask for explicit approval after planning and before implementation
+- use test-first implementation
+- validate before claiming completion
+- capture evidence before review
+- keep commits atomic and use conventional commits
+- preserve agent-specific behavior when rules differ across environments
+
+If project-local `AGENTS.md` exists, treat it as the primary readable workflow file for the repository.

@@ -222,6 +222,24 @@ Esse comando:
 - remove skills locais gerenciadas que deixaram de existir no projeto
 - grava log e manifesto local
 
+### Cursor e Windsurf
+
+Para materializar compatibilidade de workspace:
+
+```bash
+skills/superpowers-sync/scripts/sync_superpowers.py --repo-root "$(pwd)" --workspace-root "$(pwd)" --apply
+```
+
+Isso gera:
+
+- `.cursor/rules/agentic-dev-playbook.mdc`
+- `.windsurf/rules/agentic-dev-playbook.md`
+
+Observação:
+
+- Cursor tem caminho oficial de instalação do Superpowers por marketplace no repositório upstream
+- Windsurf, no material inspecionado do Superpowers, não expõe um instalador oficial equivalente; aqui a compatibilidade é por regra de workspace
+
 Arquivos de controle:
 
 ```text

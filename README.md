@@ -42,6 +42,11 @@ It is the canonical source for the shared workflow, but it must preserve agent-s
 
 - `superpowers-sync`: integrates the official Superpowers repository from `https://github.com/obra/superpowers`
 
+### Editor Compatibility
+
+- `agent-rules/cursor/agentic-dev-playbook.mdc`: Cursor workspace rule overlay
+- `agent-rules/windsurf/agentic-dev-playbook.md`: Windsurf workspace rule overlay
+
 ### Project Bootstrap and Tracker Skills
 
 - `project-init`: initializes project-level instructions and baseline automation
@@ -221,6 +226,7 @@ This repository provides `skills/superpowers-sync/` to automate that installatio
 It also handles:
 
 - updating the Superpowers clone
+- preparing workspace rule files for Cursor and Windsurf
 - replacing overlapping local project skills with Superpowers equivalents
 - removing previously managed local skills that were removed from this project
 - writing a local state file and sync log
@@ -236,6 +242,18 @@ Install or update and synchronize:
 ```bash
 skills/superpowers-sync/scripts/sync_superpowers.py --repo-root /path/to/repo --apply
 ```
+
+Install or update and also export workspace compatibility files for Cursor and Windsurf:
+
+```bash
+skills/superpowers-sync/scripts/sync_superpowers.py --repo-root /path/to/repo --workspace-root /path/to/workspace --apply
+```
+
+Current compatibility model:
+
+- Codex: official Superpowers install automated
+- Cursor: compatibility assets provided for workspace rules, plus official marketplace install path from the upstream repo
+- Windsurf: compatibility assets provided for workspace rules; no official upstream Superpowers installer was found in the inspected repository
 
 ## Canonical Rule Source
 
