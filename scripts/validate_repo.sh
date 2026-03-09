@@ -12,9 +12,9 @@ required_files=(
   "$ROOT_DIR/docs/analysis/source-mapping.md"
   "$ROOT_DIR/docs/analysis/flow-suggestions.md"
   "$ROOT_DIR/docs/decisions/BOOTSTRAP.md"
-  "$ROOT_DIR/.codex/skills/git-local-rules-sync/SKILL.md"
-  "$ROOT_DIR/.codex/skills/agentic-dev-playbook-build/SKILL.md"
-  "$ROOT_DIR/.codex/skills/agentic-dev-playbook-test/SKILL.md"
+  "$ROOT_DIR/skills/git-local-rules-sync/SKILL.md"
+  "$ROOT_DIR/skills/agentic-dev-playbook-build/SKILL.md"
+  "$ROOT_DIR/skills/agentic-dev-playbook-test/SKILL.md"
 )
 
 for file in "${required_files[@]}"; do
@@ -29,7 +29,7 @@ if ! grep -q "DOR -> SPEC -> PLAN -> APPROVAL -> TDD -> VERIFY -> EVIDENCE -> RE
   exit 1
 fi
 
-if ! grep -q "git-local-rules-sync" "$ROOT_DIR/.codex/skills/git-local-rules-sync/SKILL.md"; then
+if ! grep -q "git-local-rules-sync" "$ROOT_DIR/skills/git-local-rules-sync/SKILL.md"; then
   echo "Skill metadata missing expected name" >&2
   exit 1
 fi

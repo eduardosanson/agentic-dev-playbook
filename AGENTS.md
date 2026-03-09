@@ -57,8 +57,8 @@ Each change should leave behind:
 
 Each project should version its own automation assets in-repo:
 
-- `.codex/skills/[project]-build/`
-- `.codex/skills/[project]-test/`
+- `skills/[project]-build/`
+- `skills/[project]-test/`
 - `.githooks/pre-commit` or equivalent
 - project-local `AGENTS.md`
 

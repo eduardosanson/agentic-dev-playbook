@@ -32,7 +32,7 @@ Use this skill when a repository manages local Git conventions and the user want
 ## Command
 
 ```bash
-.codex/skills/git-local-rules-sync/scripts/sync_git_rules.sh /path/to/repo
+skills/git-local-rules-sync/scripts/sync_git_rules.sh /path/to/repo
 ```
 
 ## Safety Rules

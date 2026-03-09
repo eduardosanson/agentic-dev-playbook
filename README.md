@@ -11,7 +11,7 @@ This repository is a generic adaptation of a Claude-centric workflow into an age
 - `prompt_plan.md`: implementation plan for the bootstrap work
 - `docs/analysis/`: rationale for what was generalized and what changed
 - `docs/decisions/`: decision log for repository evolution
-- `.codex/skills/`: reusable skills, including Git rule synchronization
+- `skills/`: reusable skills, including Git rule synchronization
 - `templates/agent/`: starter templates for new projects
 - `templates/git/`: Git policy templates managed by the synchronization skill
 
@@ -50,4 +50,4 @@ See `docs/analysis/source-mapping.md` and `docs/analysis/flow-suggestions.md`.
 
 ## Git Rule Sync Skill
 
-Use `.codex/skills/git-local-rules-sync/` to install and refresh local Git conventions from this repository into the developer machine without editing `~/.gitconfig` manually.
+Use `skills/git-local-rules-sync/` to install and refresh local Git conventions from this repository into the developer machine without editing `~/.gitconfig` manually.

@@ -10,7 +10,7 @@ The current workflow and skill set are useful, but strongly tied to Claude-speci
 - FR02: Document how source instructions were translated from tool-specific to capability-based guidance.
 - FR03: Include concrete suggestions for improving the original workflow for broader adoption.
 - FR04: Provide templates for `AGENTS.md`, `spec.md`, and `prompt_plan.md`.
-- FR05: Provide a skill that updates local Git rules from repository-managed templates.
+- FR05: Provide a skill under `skills/` that updates local Git rules from repository-managed templates.
 - FR06: Provide repository-local build and test skills to validate the playbook itself.
 
 ## Non-Functional Requirements
