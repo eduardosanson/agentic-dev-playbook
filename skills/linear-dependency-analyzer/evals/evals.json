@@ -1,0 +1,89 @@
+{
+  "skill_name": "linear-dependency-analyzer",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Analise as dependências do projeto SOF. Quais tarefas estão bloqueadas e qual é o caminho crítico?",
+      "expected_output": "Markdown report com overview de dependências, grafo de tarefas bloqueadas, tarefas críticas, e caminho crítico identificado",
+      "files": [],
+      "assertions": [
+        {
+          "name": "has-dependency-graph",
+          "description": "Output contains a dependency graph or visualization section"
+        },
+        {
+          "name": "has-blocked-tasks-section",
+          "description": "Output identifies and lists blocked tasks"
+        },
+        {
+          "name": "has-critical-path",
+          "description": "Output mentions or analyzes critical path"
+        },
+        {
+          "name": "is-markdown-formatted",
+          "description": "Output is properly formatted as Markdown"
+        },
+        {
+          "name": "provides-actionable-suggestions",
+          "description": "Output includes recommendations or suggestions"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Qual é o impacto de concluir SOF-123? Quantas outras tarefas seriam desbloqueadas?",
+      "expected_output": "Análise específica mostrando todas as tarefas que seriam desbloqueadas, com lista e sugestões de próximas ações",
+      "files": [],
+      "assertions": [
+        {
+          "name": "identifies-impacted-tasks",
+          "description": "Output lists tasks that would be unblocked by completing SOF-123"
+        },
+        {
+          "name": "quantifies-impact",
+          "description": "Output provides a count or number of tasks affected"
+        },
+        {
+          "name": "explains-dependencies",
+          "description": "Output explains why tasks are blocked and how completion helps"
+        },
+        {
+          "name": "is-focused-on-specific-task",
+          "description": "Output focuses on SOF-123 specifically"
+        },
+        {
+          "name": "provides-next-steps",
+          "description": "Output suggests next actions after completing the task"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Sugira a ordem ótima de execução para o projeto para minimizar tempo bloqueado. Existem ciclos de dependência?",
+      "expected_output": "Recomendação de sequência de tarefas, identificação de tarefas prontas para iniciar, e alertas sobre ciclos se existirem",
+      "files": [],
+      "assertions": [
+        {
+          "name": "provides-execution-order",
+          "description": "Output provides a recommended sequence or order for task execution"
+        },
+        {
+          "name": "detects-circular-dependencies",
+          "description": "Output checks for or mentions circular/cyclic dependencies"
+        },
+        {
+          "name": "optimizes-for-minimization",
+          "description": "Output explains how the order minimizes blocking time"
+        },
+        {
+          "name": "groups-tasks-by-readiness",
+          "description": "Output groups tasks by readiness (ready now vs. blocked vs. critical)"
+        },
+        {
+          "name": "includes-timeline-insight",
+          "description": "Output provides insight into timeline or parallelization opportunities"
+        }
+      ]
+    }
+  ]
+}
