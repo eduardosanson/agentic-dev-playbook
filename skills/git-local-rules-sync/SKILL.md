@@ -5,6 +5,10 @@ description: Synchronize Git rules from this repository into the local developer
 
 # Git Local Rules Sync
 
+## Resumo
+
+Instala e atualiza templates de Git gerenciados pelo repositório na máquina local, sem sobrescrever configurações globais não relacionadas do usuário.
+
 Use this skill when a repository manages local Git conventions and the user wants to apply them to the current machine safely.
 
 ## What This Skill Does

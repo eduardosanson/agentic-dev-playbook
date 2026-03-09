@@ -7,6 +7,10 @@ compatibility: Requires Linear API access via claude's Linear tools
 
 # Linear Dependency Analyzer
 
+## Resumo
+
+Analisa dependências entre tarefas no Linear para identificar bloqueios, caminho crítico, impacto de conclusão e ordem de execução recomendada.
+
 This skill analyzes task dependencies in Linear projects to help you understand blockers, identify critical paths, and evaluate impact of task completions.
 
 ## How It Works

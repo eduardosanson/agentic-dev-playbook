@@ -16,6 +16,10 @@ description: |
 
 # Linear Test Validator Skill
 
+## Resumo
+
+Detecta a stack de testes do projeto, executa as suítes relevantes e documenta os resultados como evidência vinculada ao fluxo do Linear e da PR.
+
 Executa testes automaticamente em implementações do Linear, capturando resultados e documentando evidências de validação.
 
 ## 📋 O que esta skill faz

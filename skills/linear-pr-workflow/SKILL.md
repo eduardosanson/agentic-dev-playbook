@@ -17,6 +17,10 @@ description: |
 
 # Linear PR Workflow Skill
 
+## Resumo
+
+Executa um fluxo ponta a ponta a partir de uma task do Linear: seleção da tarefa, implementação, abertura de PR, coleta de evidências e atualização de status.
+
 Automatiza o ciclo completo de desenvolvimento em projetos que usam Linear e GitHub com padrões de código (codex).
 
 ## 📋 O que esta skill faz

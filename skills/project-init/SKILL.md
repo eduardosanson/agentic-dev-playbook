@@ -5,6 +5,10 @@ description: Inicializa um projeto Kotlin ou Python com CLAUDE.md otimizado e sk
 
 # Skill: project-init
 
+## Resumo
+
+Inicializa a automação operacional de um projeto detectando a stack e gerando instruções e skills básicas de build e teste.
+
 ## O que esta skill faz
 
 Executa o setup completo de um projeto em **uma única invocação**:

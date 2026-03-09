@@ -10,6 +10,10 @@ allowed-tools:
 
 # Linear
 
+## Resumo
+
+Centraliza operações sobre issues, projetos e times no Linear usando MCP, CLI ou scripts auxiliares, sem tratar ausência de MCP como bloqueio.
+
 Tools and workflows for managing issues, projects, and teams in Linear.
 
 ---

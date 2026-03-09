@@ -5,6 +5,10 @@ description: Build the distributable documentation bundle for the agentic-dev-pl
 
 # Agentic Dev Playbook Build
 
+## Resumo
+
+Gera o pacote de documentação do repositório e confirma se o diretório `dist/` foi produzido corretamente.
+
 Run the repository build script:
 
 ```bash

@@ -5,6 +5,10 @@ description: Validate the structure and required content of the agentic-dev-play
 
 # Agentic Dev Playbook Test
 
+## Resumo
+
+Valida a estrutura mínima do repositório, os arquivos obrigatórios e a consistência básica do playbook antes de commit ou release.
+
 Run the repository validation script:
 
 ```bash

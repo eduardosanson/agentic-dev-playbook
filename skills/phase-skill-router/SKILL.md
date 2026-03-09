@@ -5,6 +5,10 @@ description: Analyze AGENTS.md and map project phases to specific skills. Use wh
 
 # Phase Skill Router
 
+## Resumo
+
+Lê o `AGENTS.md`, mapeia fases e situações transversais para skills existentes ou faltantes e indica exatamente onde declarar essas associações.
+
 Use this skill when the user wants phase-specific or cross-cutting operational guidance in `AGENTS.md`.
 
 ## Goal
