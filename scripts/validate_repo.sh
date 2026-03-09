@@ -13,6 +13,7 @@ required_files=(
   "$ROOT_DIR/agent-rules/claude/CLAUDE.md"
   "$ROOT_DIR/docs/analysis/source-mapping.md"
   "$ROOT_DIR/docs/analysis/flow-suggestions.md"
+  "$ROOT_DIR/skills/superpowers-sync/SKILL.md"
   "$ROOT_DIR/docs/decisions/BOOTSTRAP.md"
   "$ROOT_DIR/skills/git-local-rules-sync/SKILL.md"
   "$ROOT_DIR/skills/agentic-dev-playbook-build/SKILL.md"

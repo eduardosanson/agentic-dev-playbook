@@ -95,6 +95,7 @@ As skills ficam em `skills/`. As principais categorias são:
 - `skill-sync-audit`
 - `git-local-rules-sync`
 - `project-init`
+- `superpowers-sync`
 
 ### Skills de integração com Linear
 
@@ -196,7 +197,39 @@ Isso instala arquivos gerenciados em:
 
 E adiciona o `include.path` correspondente ao Git global.
 
-## 10. Iniciar um novo projeto com este playbook
+## 10. Instalar e sincronizar Superpowers
+
+O projeto integra o repositório oficial:
+
+- `https://github.com/obra/superpowers`
+
+Para Codex, a instalação oficial do Superpowers usa:
+
+- clone em `~/.codex/superpowers`
+- link em `~/.agents/skills/superpowers`
+
+Este projeto automatiza isso com:
+
+```bash
+skills/superpowers-sync/scripts/sync_superpowers.py --repo-root "$(pwd)" --apply
+```
+
+Esse comando:
+
+- instala ou atualiza o clone do Superpowers
+- cria ou corrige o link de skills
+- substitui skills locais sobrepostas por equivalentes do Superpowers
+- remove skills locais gerenciadas que deixaram de existir no projeto
+- grava log e manifesto local
+
+Arquivos de controle:
+
+```text
+~/.codex/rules/agentic-dev-playbook-superpowers-state.json
+~/.codex/rules/agentic-dev-playbook-superpowers-log.jsonl
+```
+
+## 11. Iniciar um novo projeto com este playbook
 
 Se você quer reaplicar esse padrão em outro repositório:
 
@@ -212,7 +245,7 @@ Arquivos úteis:
 - [templates/agent/spec.md](/home/eduardosanson/Dev/projects/agentic-dev-playbook/templates/agent/spec.md)
 - [templates/agent/prompt_plan.md](/home/eduardosanson/Dev/projects/agentic-dev-playbook/templates/agent/prompt_plan.md)
 
-## 11. Uso recomendado no dia a dia
+## 12. Uso recomendado no dia a dia
 
 Fluxo simples:
 
@@ -231,9 +264,10 @@ git pull
 ./scripts/validate_repo.sh
 skills/agent-workflow-sync/scripts/sync_agent_workflow.py --repo-root "$(pwd)" --agent codex
 skills/skill-sync-audit/scripts/sync_skills.py --repo-root "$(pwd)" --agent codex
+skills/superpowers-sync/scripts/sync_superpowers.py --repo-root "$(pwd)"
 ```
 
-## 12. Quando usar cada skill principal
+## 13. Quando usar cada skill principal
 
 - Use `phase-refinement` quando a demanda estiver ambígua.
 - Use `phase-skill-router` quando precisar mapear fases para skills.
@@ -243,8 +277,9 @@ skills/skill-sync-audit/scripts/sync_skills.py --repo-root "$(pwd)" --agent code
 - Use `project-init` ao iniciar automação em um projeto novo.
 - Use `agent-workflow-sync` quando o workflow global do agente estiver desatualizado.
 - Use `skill-sync-audit` quando quiser saber se o ambiente do agente está alinhado com o repositório.
+- Use `superpowers-sync` quando quiser instalar ou atualizar o Superpowers e racionalizar skills locais sobrepostas.
 
-## 13. Solução de problemas
+## 14. Solução de problemas
 
 ### `validate_repo.sh` falhou
 
@@ -284,7 +319,16 @@ O script tenta cair para a cópia local do repositório. Se isso não for sufici
 - autenticação Git
 - configuração do remoto `origin`
 
-## 14. Próximos passos recomendados
+### `sync_superpowers.py` removeu uma skill local
+
+Isso só deve acontecer para skills gerenciadas por esse fluxo ou para skills explicitamente substituídas por equivalentes do Superpowers.
+
+Verifique:
+
+- `~/.codex/rules/agentic-dev-playbook-superpowers-log.jsonl`
+- backups criados com sufixo `.bak.<timestamp>`
+
+## 15. Próximos passos recomendados
 
 - manter o `README.md` alinhado com novas skills
 - atualizar o fluxograma quando o workflow mudar

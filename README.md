@@ -28,6 +28,7 @@ It is the canonical source for the shared workflow, but it must preserve agent-s
 - `git-local-rules-sync`: installs managed local Git templates and config includes
 - `agent-workflow-sync`: syncs the active agent's global workflow file with this repository
 - `skill-sync-audit`: audits and optionally updates installed skills for the active agent
+- `superpowers-sync`: installs or updates Superpowers for Codex and synchronizes project skills around it
 
 ### Workflow Phase Skills
 
@@ -36,6 +37,10 @@ It is the canonical source for the shared workflow, but it must preserve agent-s
 - `approval-checkpoint`: consolidates planning artifacts before implementation approval
 - `evidence-capture`: gathers outputs, validation evidence, and human verification steps
 - `systematic-debugging`: drives evidence-first debugging when failures occur
+
+### External Workflow Integration
+
+- `superpowers-sync`: integrates the official Superpowers repository from `https://github.com/obra/superpowers`
 
 ### Project Bootstrap and Tracker Skills
 
@@ -199,6 +204,38 @@ The audit reports:
 - skills updated
 - skills installed
 - similar skills already found in the user's environment
+
+## Superpowers Integration
+
+This project integrates with the official Superpowers repository:
+
+- `https://github.com/obra/superpowers`
+
+For Codex, the official installation model is:
+
+- clone `obra/superpowers` into `~/.codex/superpowers`
+- expose its `skills/` directory through `~/.agents/skills/superpowers`
+
+This repository provides `skills/superpowers-sync/` to automate that installation and keep project skills aligned with it.
+
+It also handles:
+
+- updating the Superpowers clone
+- replacing overlapping local project skills with Superpowers equivalents
+- removing previously managed local skills that were removed from this project
+- writing a local state file and sync log
+
+Audit only:
+
+```bash
+skills/superpowers-sync/scripts/sync_superpowers.py --repo-root /path/to/repo
+```
+
+Install or update and synchronize:
+
+```bash
+skills/superpowers-sync/scripts/sync_superpowers.py --repo-root /path/to/repo --apply
+```
 
 ## Canonical Rule Source
 
