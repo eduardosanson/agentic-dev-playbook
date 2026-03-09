@@ -19,7 +19,7 @@ Compara as skills deste repositório com as skills instaladas do agente atualmen
    - verifica se está atualizada
    - se não existir, procura skills parecidas por nome e descrição
 5. Com `--apply`, atualiza skills desatualizadas
-6. Com `--install-missing`, instala skills ausentes quando não houver conflito claro
+6. Com `--install-missing`, instala skills ausentes mesmo que existam skills parecidas
 7. Ao final, mostra:
    - agente auditado
    - skills presentes
@@ -54,4 +54,4 @@ skills/skill-sync-audit/scripts/sync_skills.py --repo-root /path/to/repo --agent
 - Nunca apagar skills do usuário automaticamente
 - Criar backup antes de sobrescrever uma skill instalada
 - Se o agente não puder ser detectado, pedir ou exigir `--agent`
-- Se existir skill parecida mas não idêntica, relatar isso ao usuário em vez de assumir substituição silenciosa
+- Se existir skill parecida mas não idêntica, relatar isso ao usuário sem bloquear a instalação da skill ausente

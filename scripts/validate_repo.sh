@@ -11,12 +11,10 @@ required_files=(
   "$ROOT_DIR/.githooks/pre-commit"
   "$ROOT_DIR/agent-rules/codex/AGENTS.md"
   "$ROOT_DIR/agent-rules/claude/CLAUDE.md"
-  "$ROOT_DIR/agent-rules/cursor/agentic-dev-playbook.mdc"
-  "$ROOT_DIR/agent-rules/windsurf/agentic-dev-playbook.md"
   "$ROOT_DIR/docs/analysis/source-mapping.md"
   "$ROOT_DIR/docs/analysis/flow-suggestions.md"
+  "$ROOT_DIR/docs/spec-vs-implementation.md"
   "$ROOT_DIR/skills/superpowers-sync/SKILL.md"
-  "$ROOT_DIR/skills/workspace-editor-sync/SKILL.md"
   "$ROOT_DIR/docs/decisions/BOOTSTRAP.md"
   "$ROOT_DIR/skills/git-local-rules-sync/SKILL.md"
   "$ROOT_DIR/skills/agentic-dev-playbook-build/SKILL.md"
@@ -37,6 +35,11 @@ fi
 
 if ! grep -q "TDD -> BUILD -> VERIFY -> EVIDENCE -> REVIEW/PR -> DONE" "$ROOT_DIR/README.md"; then
   echo "Execution workflow string missing from README.md" >&2
+  exit 1
+fi
+
+if ! grep -q "specification layer" "$ROOT_DIR/README.md"; then
+  echo "Specification boundary missing from README.md" >&2
   exit 1
 fi
 

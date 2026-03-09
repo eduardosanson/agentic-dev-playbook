@@ -212,8 +212,7 @@ flowchart LR
     M[Sincronizar workflow global do agente] --> N[agent-workflow-sync]
     O[Auditar ou atualizar skills instaladas] --> P[skill-sync-audit]
     Q[Sincronizar regras locais de Git] --> R[git-local-rules-sync]
-    S[Instalar ou atualizar Superpowers] --> T[superpowers-sync]
-    U[Compatibilizar workspace com Cursor e Windsurf] --> V[workspace-editor-sync]
+    S[Instalar ou atualizar Superpowers opcionalmente] --> T[superpowers-sync]
 ```
 
 ## Leitura Operacional
@@ -232,5 +231,5 @@ flowchart LR
 - `phase-skill-router` decide se já existe skill adequada para uma fase ou situação transversal.
 - Se a skill não existir, ela deve ser descrita e só criada com permissão do usuário.
 - `agent-workflow-sync` e `skill-sync-audit` são agent-aware: atuam sobre o agente em uso ou sobre o agente explicitamente informado.
-- `superpowers-sync` instala o repositório oficial do Superpowers e substitui skills locais mapeadas para equivalentes externas.
-- `workspace-editor-sync` exporta regras de workspace para Cursor e Windsurf.
+- `superpowers-sync` é uma automação opcional para Codex; o uso de Superpowers é recomendado quando ajudar, não obrigatório.
+- detalhes de configuração de Cursor, Windsurf e outros runtimes ficam fora do núcleo deste repositório.

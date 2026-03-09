@@ -121,7 +121,7 @@ def main() -> int:
                 candidates.sort(reverse=True)
                 pretty = ", ".join(f"{name} ({score:.2f})" for score, name in candidates[:3])
                 report["similar"].append(f"{skill_dir_name}: {pretty}")
-            elif args.apply and args.install_missing:
+            if args.apply and args.install_missing:
                 replace_dir(repo_skill.path, target_root / skill_dir_name)
                 report["installed"].append(skill_dir_name)
             continue

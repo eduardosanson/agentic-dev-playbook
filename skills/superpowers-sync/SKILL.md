@@ -1,13 +1,13 @@
 ---
 name: superpowers-sync
-description: Install or update obra/superpowers for Codex, synchronize project skills against the active environment, replace overlapping local skills with Superpowers equivalents, and remove previously managed local skills that no longer exist in the project.
+description: Optionally install or update obra/superpowers for Codex, synchronize project skills against the active environment, replace overlapping local skills with Superpowers equivalents, and remove previously managed local skills that no longer exist in the project.
 ---
 
 # Superpowers Sync
 
 ## Resumo
 
-Instala ou atualiza o Superpowers para Codex, sincroniza as skills do projeto com o ambiente local, substitui skills locais sobrepostas por equivalentes do Superpowers e remove skills gerenciadas que deixaram de existir no projeto.
+Instala ou atualiza opcionalmente o Superpowers para Codex, sincroniza as skills do projeto com o ambiente local, substitui skills locais sobrepostas por equivalentes do Superpowers e remove skills gerenciadas que deixaram de existir no projeto.
 
 ## Repositório Oficial
 
@@ -21,6 +21,12 @@ Instala ou atualiza o Superpowers para Codex, sincroniza as skills do projeto co
 4. Substitui skills locais gerenciadas que foram mapeadas para equivalentes do Superpowers
 5. Remove skills locais previamente gerenciadas que foram removidas do projeto
 6. Gera log e manifesto do que foi alterado
+
+## Quando usar
+
+Use esta skill quando o agente atual for Codex e houver intenção explícita de adotar o `Superpowers` como integração opcional.
+
+Não trate esta skill como requisito do workflow padrão do repositório.
 
 ## Substituições padrão
 
@@ -53,3 +59,4 @@ skills/superpowers-sync/scripts/sync_superpowers.py --repo-root /path/to/repo --
 - não apagar skills não gerenciadas por este fluxo
 - usar o repositório oficial do Superpowers como origem
 - registrar toda alteração no log
+- manter `Superpowers` como recomendação opcional, não como dependência obrigatória do padrão do repositório

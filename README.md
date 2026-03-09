@@ -6,7 +6,7 @@ This repository is a generic adaptation of a Claude-centric workflow into an age
 
 This repository is also the canonical source of truth for workflow rules that can be synchronized into different agent environments.
 
-It is the canonical source for the shared workflow, but it must preserve agent-specific behavior where runtimes, tools, or ecosystems differ.
+It is the canonical source for the shared workflow, but it must preserve agent-specific behavior where runtimes, tools, or ecosystems differ. This repository owns the specification layer, not editor-specific implementation details.
 
 ## What This Repo Contains
 
@@ -14,6 +14,7 @@ It is the canonical source for the shared workflow, but it must preserve agent-s
 - `spec.md`: bootstrap specification for this repository
 - `prompt_plan.md`: implementation plan for the bootstrap work
 - `docs/analysis/`: rationale for what was generalized and what changed
+- `docs/spec-vs-implementation.md`: boundary between shared specification and agent-specific implementation
 - `docs/decisions/`: decision log for repository evolution
 - `skills/`: reusable skills, including Git rule synchronization
 - `templates/agent/`: starter templates for new projects
@@ -28,8 +29,7 @@ It is the canonical source for the shared workflow, but it must preserve agent-s
 - `git-local-rules-sync`: installs managed local Git templates and config includes
 - `agent-workflow-sync`: syncs the active agent's global workflow file with this repository
 - `skill-sync-audit`: audits and optionally updates installed skills for the active agent
-- `superpowers-sync`: installs or updates Superpowers for Codex and synchronizes project skills around it
-- `workspace-editor-sync`: exports workspace rule files for editor agents such as Cursor and Windsurf
+- `superpowers-sync`: optionally installs or updates Superpowers for Codex and synchronizes project skills around it
 
 ### Workflow Phase Skills
 
@@ -41,13 +41,7 @@ It is the canonical source for the shared workflow, but it must preserve agent-s
 
 ### External Workflow Integration
 
-- `superpowers-sync`: integrates the official Superpowers repository from `https://github.com/obra/superpowers`
-
-### Editor Compatibility
-
-- `agent-rules/cursor/agentic-dev-playbook.mdc`: Cursor workspace rule overlay
-- `agent-rules/windsurf/agentic-dev-playbook.md`: Windsurf workspace rule overlay
-- `workspace-editor-sync`: materializes those overlays into workspace-local files
+- `superpowers-sync`: optionally integrates the official Superpowers repository from `https://github.com/obra/superpowers`
 
 ### Project Bootstrap and Tracker Skills
 
@@ -115,6 +109,7 @@ Rule:
 
 - do not flatten agent-specific behavior into a single file unless there is 100% certainty that the behavior is portable
 - changes to workflow rules must account for the specific capabilities of each agent before synchronization
+- editor-specific configuration belongs to the agent or editor runtime, not to the core repository standard
 
 ## Execution Guardrails
 
@@ -214,7 +209,7 @@ The audit reports:
 
 ## Superpowers Integration
 
-This project integrates with the official Superpowers repository:
+This project can integrate with the official Superpowers repository as an optional recommendation:
 
 - `https://github.com/obra/superpowers`
 
@@ -223,7 +218,7 @@ For Codex, the official installation model is:
 - clone `obra/superpowers` into `~/.codex/superpowers`
 - expose its `skills/` directory through `~/.agents/skills/superpowers`
 
-This repository provides `skills/superpowers-sync/` to automate that installation and keep project skills aligned with it.
+This repository provides `skills/superpowers-sync/` as an optional utility to automate that installation and keep project skills aligned with it.
 
 It also handles:
 
@@ -244,27 +239,12 @@ Install or update and synchronize:
 skills/superpowers-sync/scripts/sync_superpowers.py --repo-root /path/to/repo --apply
 ```
 
-Current compatibility model:
+Guidance:
 
-- Codex: official Superpowers install automated
-- Cursor: compatibility assets provided for workspace rules, plus official marketplace install path from the upstream repo
-- Windsurf: compatibility assets provided for workspace rules; no official upstream Superpowers installer was found in the inspected repository
-
-### Workspace Editor Compatibility
-
-Use `skills/workspace-editor-sync/` to materialize workspace-level files for Cursor and Windsurf.
-
-Audit only:
-
-```bash
-skills/workspace-editor-sync/scripts/sync_workspace_editors.py --repo-root /path/to/repo --workspace-root /path/to/workspace
-```
-
-Apply:
-
-```bash
-skills/workspace-editor-sync/scripts/sync_workspace_editors.py --repo-root /path/to/repo --workspace-root /path/to/workspace --apply
-```
+- Codex has an optional automated installation path in this repository
+- other agents may adopt the same specification through their own native mechanisms
+- editor-specific configuration for Cursor, Windsurf, and similar tools should be defined by the agent implementation itself, not by this repository
+- Superpowers should be treated as recommended, not mandatory
 
 ## Canonical Rule Source
 
@@ -278,6 +258,8 @@ That means:
 - local agent files should not become the primary source of truth
 
 For agent-specific behavior, the canonical source is the corresponding file under `agent-rules/`.
+
+See `docs/spec-vs-implementation.md` for the boundary between shared rules and agent-specific implementation.
 
 ## Git Rule Sync Skill
 

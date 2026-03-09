@@ -96,7 +96,6 @@ As skills ficam em `skills/`. As principais categorias são:
 - `git-local-rules-sync`
 - `project-init`
 - `superpowers-sync`
-- `workspace-editor-sync`
 
 ### Skills de integração com Linear
 
@@ -209,7 +208,7 @@ Para Codex, a instalação oficial do Superpowers usa:
 - clone em `~/.codex/superpowers`
 - link em `~/.agents/skills/superpowers`
 
-Este projeto automatiza isso com:
+Este projeto oferece uma automação opcional para isso com:
 
 ```bash
 skills/superpowers-sync/scripts/sync_superpowers.py --repo-root "$(pwd)" --apply
@@ -223,23 +222,11 @@ Esse comando:
 - remove skills locais gerenciadas que deixaram de existir no projeto
 - grava log e manifesto local
 
-### Cursor e Windsurf
-
-Para materializar compatibilidade de workspace:
-
-```bash
-skills/workspace-editor-sync/scripts/sync_workspace_editors.py --repo-root "$(pwd)" --workspace-root "$(pwd)" --apply
-```
-
-Isso gera:
-
-- `.cursor/rules/agentic-dev-playbook.mdc`
-- `.windsurf/rules/agentic-dev-playbook.md`
-
 Observação:
 
-- Cursor tem caminho oficial de instalação do Superpowers por marketplace no repositório upstream
-- Windsurf, no material inspecionado do Superpowers, não expõe um instalador oficial equivalente; aqui a compatibilidade é por regra de workspace
+- `Superpowers` é recomendado quando fizer sentido, mas não faz parte obrigatória do padrão
+- a forma de configurar Claude, Cursor, Windsurf ou outros agentes deve ser decidida pelo runtime específico
+- este repositório define a especificação compartilhada, não os arquivos internos de configuração de cada editor
 
 Arquivos de controle:
 
@@ -284,7 +271,6 @@ git pull
 skills/agent-workflow-sync/scripts/sync_agent_workflow.py --repo-root "$(pwd)" --agent codex
 skills/skill-sync-audit/scripts/sync_skills.py --repo-root "$(pwd)" --agent codex
 skills/superpowers-sync/scripts/sync_superpowers.py --repo-root "$(pwd)"
-skills/workspace-editor-sync/scripts/sync_workspace_editors.py --repo-root "$(pwd)" --workspace-root "$(pwd)"
 ```
 
 ## 13. Quando usar cada skill principal
@@ -298,7 +284,6 @@ skills/workspace-editor-sync/scripts/sync_workspace_editors.py --repo-root "$(pw
 - Use `agent-workflow-sync` quando o workflow global do agente estiver desatualizado.
 - Use `skill-sync-audit` quando quiser saber se o ambiente do agente está alinhado com o repositório.
 - Use `superpowers-sync` quando quiser instalar ou atualizar o Superpowers e racionalizar skills locais sobrepostas.
-- Use `workspace-editor-sync` quando quiser materializar ou atualizar regras de workspace para Cursor e Windsurf.
 
 ## 14. Solução de problemas
 
@@ -355,3 +340,22 @@ Verifique:
 - atualizar o fluxograma quando o workflow mudar
 - versionar novas skills no próprio repositório
 - evitar regras importantes apenas em contexto temporário do agente
+
+## 16. Especificação vs implementação
+
+Use este repositório para definir:
+
+- workflow compartilhado
+- guardrails
+- critérios de evidência
+- sincronização conceitual das regras
+
+Não use este repositório para impor:
+
+- arquivos nativos de Cursor ou Windsurf
+- detalhes de plugin de um editor específico
+- uma implementação única para todos os agentes
+
+Referência:
+
+- [spec-vs-implementation.md](/home/eduardosanson/Dev/projects/agentic-dev-playbook/docs/spec-vs-implementation.md)
