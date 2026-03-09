@@ -96,6 +96,7 @@ As skills ficam em `skills/`. As principais categorias são:
 - `git-local-rules-sync`
 - `project-init`
 - `superpowers-sync`
+- `workspace-editor-sync`
 
 ### Skills de integração com Linear
 
@@ -227,7 +228,7 @@ Esse comando:
 Para materializar compatibilidade de workspace:
 
 ```bash
-skills/superpowers-sync/scripts/sync_superpowers.py --repo-root "$(pwd)" --workspace-root "$(pwd)" --apply
+skills/workspace-editor-sync/scripts/sync_workspace_editors.py --repo-root "$(pwd)" --workspace-root "$(pwd)" --apply
 ```
 
 Isso gera:
@@ -283,6 +284,7 @@ git pull
 skills/agent-workflow-sync/scripts/sync_agent_workflow.py --repo-root "$(pwd)" --agent codex
 skills/skill-sync-audit/scripts/sync_skills.py --repo-root "$(pwd)" --agent codex
 skills/superpowers-sync/scripts/sync_superpowers.py --repo-root "$(pwd)"
+skills/workspace-editor-sync/scripts/sync_workspace_editors.py --repo-root "$(pwd)" --workspace-root "$(pwd)"
 ```
 
 ## 13. Quando usar cada skill principal
@@ -296,6 +298,7 @@ skills/superpowers-sync/scripts/sync_superpowers.py --repo-root "$(pwd)"
 - Use `agent-workflow-sync` quando o workflow global do agente estiver desatualizado.
 - Use `skill-sync-audit` quando quiser saber se o ambiente do agente está alinhado com o repositório.
 - Use `superpowers-sync` quando quiser instalar ou atualizar o Superpowers e racionalizar skills locais sobrepostas.
+- Use `workspace-editor-sync` quando quiser materializar ou atualizar regras de workspace para Cursor e Windsurf.
 
 ## 14. Solução de problemas
 

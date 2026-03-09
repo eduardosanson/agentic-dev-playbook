@@ -29,6 +29,7 @@ It is the canonical source for the shared workflow, but it must preserve agent-s
 - `agent-workflow-sync`: syncs the active agent's global workflow file with this repository
 - `skill-sync-audit`: audits and optionally updates installed skills for the active agent
 - `superpowers-sync`: installs or updates Superpowers for Codex and synchronizes project skills around it
+- `workspace-editor-sync`: exports workspace rule files for editor agents such as Cursor and Windsurf
 
 ### Workflow Phase Skills
 
@@ -46,6 +47,7 @@ It is the canonical source for the shared workflow, but it must preserve agent-s
 
 - `agent-rules/cursor/agentic-dev-playbook.mdc`: Cursor workspace rule overlay
 - `agent-rules/windsurf/agentic-dev-playbook.md`: Windsurf workspace rule overlay
+- `workspace-editor-sync`: materializes those overlays into workspace-local files
 
 ### Project Bootstrap and Tracker Skills
 
@@ -226,7 +228,6 @@ This repository provides `skills/superpowers-sync/` to automate that installatio
 It also handles:
 
 - updating the Superpowers clone
-- preparing workspace rule files for Cursor and Windsurf
 - replacing overlapping local project skills with Superpowers equivalents
 - removing previously managed local skills that were removed from this project
 - writing a local state file and sync log
@@ -243,17 +244,27 @@ Install or update and synchronize:
 skills/superpowers-sync/scripts/sync_superpowers.py --repo-root /path/to/repo --apply
 ```
 
-Install or update and also export workspace compatibility files for Cursor and Windsurf:
-
-```bash
-skills/superpowers-sync/scripts/sync_superpowers.py --repo-root /path/to/repo --workspace-root /path/to/workspace --apply
-```
-
 Current compatibility model:
 
 - Codex: official Superpowers install automated
 - Cursor: compatibility assets provided for workspace rules, plus official marketplace install path from the upstream repo
 - Windsurf: compatibility assets provided for workspace rules; no official upstream Superpowers installer was found in the inspected repository
+
+### Workspace Editor Compatibility
+
+Use `skills/workspace-editor-sync/` to materialize workspace-level files for Cursor and Windsurf.
+
+Audit only:
+
+```bash
+skills/workspace-editor-sync/scripts/sync_workspace_editors.py --repo-root /path/to/repo --workspace-root /path/to/workspace
+```
+
+Apply:
+
+```bash
+skills/workspace-editor-sync/scripts/sync_workspace_editors.py --repo-root /path/to/repo --workspace-root /path/to/workspace --apply
+```
 
 ## Canonical Rule Source
 

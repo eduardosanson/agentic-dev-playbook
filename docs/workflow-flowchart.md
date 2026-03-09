@@ -213,7 +213,7 @@ flowchart LR
     O[Auditar ou atualizar skills instaladas] --> P[skill-sync-audit]
     Q[Sincronizar regras locais de Git] --> R[git-local-rules-sync]
     S[Instalar ou atualizar Superpowers] --> T[superpowers-sync]
-    U[Compatibilizar workspace com Cursor e Windsurf] --> T
+    U[Compatibilizar workspace com Cursor e Windsurf] --> V[workspace-editor-sync]
 ```
 
 ## Leitura Operacional
@@ -233,4 +233,4 @@ flowchart LR
 - Se a skill não existir, ela deve ser descrita e só criada com permissão do usuário.
 - `agent-workflow-sync` e `skill-sync-audit` são agent-aware: atuam sobre o agente em uso ou sobre o agente explicitamente informado.
 - `superpowers-sync` instala o repositório oficial do Superpowers e substitui skills locais mapeadas para equivalentes externas.
-- `superpowers-sync` também pode exportar regras de workspace para Cursor e Windsurf.
+- `workspace-editor-sync` exporta regras de workspace para Cursor e Windsurf.
