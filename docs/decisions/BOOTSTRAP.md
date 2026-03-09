@@ -27,3 +27,9 @@
 - Decision: treat validation script output and the temporary-home Git sync run as the bootstrap evidence set.
 - Decision: generate a `dist/` bundle as the repository build artifact so the build skill has a concrete deliverable.
 - Accepted risk: the build artifact is documentation packaging only, not a compiled binary or published site.
+
+## EVIDENCE -> REVIEW/PR -- 2026-03-09
+
+- Decision: publish the repository publicly on GitHub immediately after local validation so the playbook is consumable without an additional staging step.
+- Decision: keep the initial history as a single bootstrap commit because the repository starts from documentation and reusable automation assets, not an evolving codebase.
+- Accepted risk: the first public revision is intentionally broad and may later be split into more focused modules as adoption patterns emerge.
