@@ -1,0 +1,9 @@
+[commit]
+    template = ~/.config/agentic-dev-playbook/git/commit-template.txt
+
+[core]
+    hooksPath = ~/.config/agentic-dev-playbook/git/hooks
+    excludesFile = ~/.config/agentic-dev-playbook/git/global.gitignore
+
+[pull]
+    ff = only

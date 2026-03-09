@@ -1,0 +1,6 @@
+#!/bin/sh
+
+echo "Run repository-specific validation here."
+echo "Example:"
+echo "  ./scripts/validate_repo.sh"
+exit 0

@@ -1,0 +1,11 @@
+type(scope): summary
+
+# Allowed types:
+# feat, fix, refactor, test, docs, chore
+#
+# Body:
+# - why this change exists
+# - important design decision
+#
+# Footer:
+# - issue refs, breaking changes, follow-ups
