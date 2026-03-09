@@ -24,8 +24,13 @@ for file in "${required_files[@]}"; do
   fi
 done
 
-if ! grep -q "DOR -> SPEC -> PLAN -> APPROVAL -> TDD -> VERIFY -> EVIDENCE -> REVIEW/PR -> DONE" "$ROOT_DIR/README.md"; then
-  echo "Workflow string missing from README.md" >&2
+if ! grep -q "DOR -> SPEC -> PLAN" "$ROOT_DIR/README.md"; then
+  echo "Planning workflow string missing from README.md" >&2
+  exit 1
+fi
+
+if ! grep -q "TDD -> BUILD -> VERIFY -> EVIDENCE -> REVIEW/PR -> DONE" "$ROOT_DIR/README.md"; then
+  echo "Execution workflow string missing from README.md" >&2
   exit 1
 fi
 
